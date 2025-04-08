@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color1: #ccd5ae;
+  --color2: #e9edc9;
+  --color3: #fefae0;
+  --color4: #faedcd;
+  --color5: #d4a373;
+  --color6: #a55200;
+  --color7: #ff9595;
+  --color8: #7cffcb;
+}

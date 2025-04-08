@@ -1,0 +1,13 @@
+$backgroundImageColor: url("/homePageBackgroundImageProtocol.png");
+.homePage {
+  min-height: 100vh;
+  background-color: var(--color3);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("/homePageBackgroundImageProtocol.png");
+  background: $backgroundImageColor var(--color3);
+  background-size: 200px;
+
+  background-blend-mode: multiply;
+}

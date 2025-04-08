@@ -1,0 +1,67 @@
+.quizSearchComponent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  width: 100%;
+  margin: 100px;
+  .tittle {
+    background-color: var(--color1);
+    padding: 10px 10px;
+    border-radius: 8px;
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      color: #a55200;
+    }
+    p {
+      font-size: 1.1rem;
+      text-align: center;
+      color: rgba(#a55200, 0.8);
+      padding: 5px;
+    }
+  }
+
+  .searchComponent {
+    max-width: 90%;
+    width: 650px;
+    background-color: rgba(var(--color1), 0.75);
+    border: 2px solid black;
+    border-color: var(--color5);
+    padding: 40px 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    $fontSize: 1.1rem;
+
+    input {
+      padding: 10px 20px;
+      border-radius: 65px;
+      border: none;
+      outline: none;
+      border: 2px solid var(--color5);
+      font-size: $fontSize;
+      background-color: var(--color3);
+    }
+    button {
+      width: max-content;
+      margin: 0 auto;
+      padding: 10px 20px;
+      font-size: $fontSize;
+      background-color: var(--color5);
+      color: white;
+      border: none;
+      border: 2px solid var(--color5);
+      border-radius: 8px;
+      cursor: pointer;
+      &:hover {
+        background-color: var(--color3);
+        color: black;
+      }
+    }
+  }
+}
