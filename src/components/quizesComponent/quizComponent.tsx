@@ -7,6 +7,7 @@ export default function QuizComponent({
   Answer,
   explanation,
   QuestionNumber,
+  label
 }: {
   Question: string;
   OptionOne: string;
@@ -16,6 +17,7 @@ export default function QuizComponent({
   Answer: number | boolean | string;
   explanation: string;
   QuestionNumber: number;
+  label: string;
 }) {
   const optionClicked = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.stopPropagation();
@@ -32,8 +34,9 @@ export default function QuizComponent({
       currentInput.checked = true;
     }
   };
+
   return (
-    <div className={`quizComponent`}>
+    <div className={`quizComponent`} id={label}>
       <div className="tittle">
         <h2>{Question}</h2>
       </div>

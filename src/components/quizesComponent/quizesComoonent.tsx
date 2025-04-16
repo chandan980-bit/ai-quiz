@@ -14,6 +14,9 @@ import "./quizesComponent.scss";
 import QuizComponent from "./quizComponent";
 import { useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import ChartComponent from "../chartComponent/chartComp";
+import { stringify } from "querystring";
+import Link from "next/link";
 
 export default function QuizzesComponent({ quizData }: { quizData: QuizData }) {
   const initialQuizData = quizData.map((quiz, index) => {
@@ -31,8 +34,10 @@ export default function QuizzesComponent({ quizData }: { quizData: QuizData }) {
   const [quizzes, setQuizzes] = useState<QuizData>(initialQuizData);
   const [score, updateScore] = useState<number | null>(null);
   const quizContainer = useRef<HTMLDivElement>(null);
+  const [correctQuestions, updateCorrectQuestions] = useState<number[]>([])
 
   function evaluateQuiz() {
+    updateCorrectQuestions([])
     let score = 0;
     const quizComponents = quizContainer.current?.children;
     if (!quizComponents) return;
@@ -58,8 +63,12 @@ export default function QuizzesComponent({ quizData }: { quizData: QuizData }) {
 
       if (selectedOptionIndex === correctOptionIndex) {
         score += 1;
+        updateCorrectQuestions((prev) => {
+          return [...prev, i]
+        })
       }
     }
+
     // update class of correct option and incorrect option
     for (let i = 0; i < quizComponents.length; i++) {
       const options = quizComponents[i].querySelectorAll("input");
@@ -82,17 +91,39 @@ export default function QuizzesComponent({ quizData }: { quizData: QuizData }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  console.log("quizzes", quizData);
+  console.log(correctQuestions)
+
+
+
 
   return (
     <div className="quizzesComponent">
       {score !== null ? (
-        <div className="score">
-          <h2>Your Score is {score}</h2>
+        <div className="headerWrapper">
+          {/* <div className="score">
+            <h2>Your Score is {score}</h2>
+          </div> */}
+          <ChartComponent
+            wrong={10 - score}
+            correct={score}
+          />
+          <div className="buttonWrapper">
+            {
+              Array(10).fill(0).map((val, index) => {
+                return (
+                  <div className={correctQuestions.find((elem) => elem === index) ? "correct" : "incorrect"}>
+                    <p>
+                      <Link href={`#${index + 1}`}>{index + 1}</Link>
+                    </p>
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
       ) : null}
       <div className="quizzesContainer" ref={quizContainer}>
-        {quizzes.map((quiz) => (
+        {quizzes.map((quiz, index) => (
           <QuizComponent
             key={quiz.Question}
             QuestionNumber={quizzes.indexOf(quiz)}
@@ -103,6 +134,7 @@ export default function QuizzesComponent({ quizData }: { quizData: QuizData }) {
             OptionFour={quiz.OptionFour}
             Answer={quiz.Answer}
             explanation={quiz.explanation}
+            label={(index + 1).toString()}
           />
         ))}
       </div>

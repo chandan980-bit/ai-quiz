@@ -7,7 +7,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 export default async function GenerateQuizAI(quizTopic: string) {
   if (!quizTopic || quizTopic.trim() === "" || quizTopic.length > 45) {
     return false;
-  }
+  } 
   const prompt = `Give me 10 quiz questions on topic ${quizTopic.trim()}. The out should only contain json data in format Array<{Question:"string",OptionOne:"string",OptionTwo:"string",OptionThree:"string",OptionFour:"string", Answer:"optionNumber", explanation:"string"}>`;
   try {
     const response = await model.generateContent(prompt);
